@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Exclusão</title>
+    <style>
+        /* Estilos básicos para a página de confirmação */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+
+        .confirmacao {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .informacoes {
+            margin-bottom: 20px;
+        }
+
+        .btn-confirmar {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-confirmar:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-cancelar {
+            background-color: #95a5a6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-cancelar:hover {
+            background-color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Confirmar Exclusão</h1>
+
+    <div class="confirmacao">
+        <div class="informacoes">
+            <h3><%= propriedade.endereco %> - <%= propriedade.tipo %></h3>
+            <p><strong>Quartos:</strong> <%= propriedade.quartos %> | <strong>Banheiros:</strong> <%= propriedade.banheiro %></p>
+            <p><strong>Disponibilidade:</strong> <%= propriedade.disponivel ? "Disponível" : "Indisponível" %></p>
+            <p class="price">R$<%= propriedade.aluguel %> / mês</p>
+        </div>
+
+        <form action="/Propriedades/Excluir/<%= propriedade._id %>" method="POST">
+            <button class="btn-confirmar" type="submit">Confirmar Exclusão</button>
+        </form>
+
+        <a href="/Propriedades">
+            <button class="btn-cancelar">Cancelar</button>
+        </a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Propriedade</title>
+</head>
+<body>
+
+<h1>Editar Propriedade</h1>
+
+<!-- Formulário de Edição -->
+<form action="/Propriedades/Atualizar/<%= propriedade._id %>" method="POST">
+    <!-- Campos do formulário para editar a propriedade -->
+    <label for="endereco">Endereço</label>
+    <input type="text" id="endereco" name="endereco" value="<%= propriedade.endereco %>" required>
+
+    <label for="tipo">Tipo</label>
+    <input type="text" id="tipo" name="tipo" value="<%= propriedade.tipo %>" required>
+
+    <label for="quartos">Quartos</label>
+    <input type="number" id="quartos" name="quartos" value="<%= propriedade.quartos %>" required>
+
+    <label for="banheiro">Banheiro</label>
+    <input type="number" id="banheiro" name="banheiro" value="<%= propriedade.banheiro %>" required>
+
+    <label for="aluguel">Aluguel (R$)</label>
+    <input type="number" id="aluguel" name="aluguel" value="<%= propriedade.aluguel %>" step="0.01" required>
+
+    <label for="disponivel">Disponibilidade</label>
+    <select id="disponivel" name="disponivel" required>
+        <option value="true" <%= propriedade.disponivel ? "selected" : "" %>>Sim</option>
+        <option value="false" <%= !propriedade.disponivel ? "selected" : "" %>>Não</option>
+    </select>
+
+    <label for="imagem_url">Imagem URL</label>
+    <input type="text" id="imagem_url" name="imagem_url" value="<%= propriedade.imagem_url %>">
+
+    <button type="submit">Atualizar Propriedade</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pagamento</title>
+    <style>
+        /* Estilos semelhantes aos anteriores */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menu de Navegação -->
+    <nav>
+        <a href="/Propriedades">Propriedades</a>
+        <a href="/Contratos">Contratos</a>
+        <a href="/Pagamentos">Pagamentos</a>
+    </nav>
+
+    <h1>Editar Pagamento</h1>
+
+    <div class="form-container">
+        <form action="/Pagamentos/Editar/<%= pagamento._id %>" method="POST">
+            <input type="hidden" name="idContrato" value="<%= pagamento.idContrato %>">
+
+            <!-- Valor Pago -->
+            <label for="valorPago">Valor Pago</label>
+            <input type="number" name="valorPago" value="<%= pagamento.valorPago %>" required step="0.01" min="0">
+
+            <!-- Data do Pagamento -->
+            <label for="dataPagamento">Data do Pagamento</label>
+            <input type="date" name="dataPagamento" value="<%= pagamento.dataPagamento.toISOString().split('T')[0] %>" required>
+
+            <!-- Situação -->
+            <label for="situacao">Situação</label>
+            <select name="situacao" required>
+                <option value="Pendente" <%= pagamento.situacao === 'Pendente' ? 'selected' : '' %>>Pendente</option>
+                <option value="Pago" <%= pagamento.situacao === 'Pago' ? 'selected' : '' %>>Pago</option>
+            </select>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+
+</body>
+</html>

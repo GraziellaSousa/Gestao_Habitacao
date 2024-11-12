@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contratos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .contrato-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contrato-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+        }
+
+        .contrato-item h3 {
+            margin-bottom: 10px;
+        }
+
+        .contrato-item p {
+            margin: 5px 0;
+        }
+
+        .contrato-item button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .contrato-item button:hover {
+            background-color: #45a049;
+        }
+
+        .contrato-item .visualizar {
+            background-color: #007BFF;
+        }
+
+        .contrato-item .visualizar:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu de Navegação -->
+    <nav>
+        <a href="/Propriedades">Propriedades</a>
+        <a href="/Contratos">Contratos</a>
+        <a href="/Pagamentos">Pagamentos</a>
+    </nav>
+
+    <h1>Lista de Contratos</h1>
+
+    <div class="contrato-container">
+        <% contratos.forEach(function(contrato) { %>
+            <div class="contrato-item">
+                <h3>ID do Contrato: <%= contrato._id %></h3> <!-- Exibe o ID do contrato -->
+                <p><strong>Inquilino:</strong> <%= contrato.inquilino %> | 
+                   <strong>Data Início:</strong> <%= contrato.dataInicio.toISOString().split('T')[0] %> | 
+                   <strong>Data Fim:</strong> <%= contrato.dataFim.toISOString().split('T')[0] %></p>
+                <p><strong>Status:</strong> <%= contrato.status ? "Ativo" : "Inativo" %></p>
+                
+                <!-- Verificação antes de chamar toFixed() -->
+                <p><strong>Valor:</strong> R$<%= contrato.valorPropriedade && !isNaN(contrato.valorPropriedade) ? contrato.valorPropriedade.toFixed(2) : 'N/A' %></p>
+
+                <!-- Botões de Editar e Visualizar -->
+                <a href="/Contratos/Editar/<%= contrato._id %>">
+                    <button>Editar</button>
+                </a>
+                
+                <a href="/Contratos/Detalhes/<%= contrato._id %>">
+                    <button class="visualizar">Visualizar</button>
+                </a>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Contrato</title>
+</head>
+<body>
+    <h1>Editar Contrato</h1>
+    
+    <!-- Aqui vamos usar POST diretamente, sem method-override -->
+    <form action="/Contratos/Atualizar/<%= contrato._id %>" method="POST">
+        <label for="inquilino">Inquilino:</label>
+        <input type="text" id="inquilino" name="inquilino" value="<%= contrato.inquilino %>" required><br><br>
+
+        <label for="dataInicio">Data de Início:</label>
+        <input type="date" id="dataInicio" name="dataInicio" value="<%= contrato.dataInicio.toISOString().split('T')[0] %>" required><br><br>
+
+        <label for="dataFim">Data de Fim:</label>
+        <input type="date" id="dataFim" name="dataFim" value="<%= contrato.dataFim.toISOString().split('T')[0] %>" required><br><br>
+
+        <label for="valorPropriedade">Valor da Propriedade:</label>
+        <input type="number" id="valorPropriedade" name="valorPropriedade" step="0.01" value="<%= contrato.valorPropriedade %>" required><br><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="true" <%= contrato.status ? 'selected' : '' %>>Ativo</option>
+            <option value="false" <%= !contrato.status ? 'selected' : '' %>>Inativo</option>
+        </select><br><br>
+
+        <button type="submit">Atualizar Contrato</button>
+    </form>
+
+    <a href="/Contratos">Voltar para a lista de contratos</a>
+</body>
+</html>

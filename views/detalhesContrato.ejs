@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Contrato</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .detalhes-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .detalhes-item {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .detalhes-item h3 {
+            margin-bottom: 10px;
+        }
+
+        .detalhes-item p {
+            margin: 5px 0;
+        }
+
+        .status-pagamento {
+            font-weight: bold;
+        }
+
+        .status-pendente {
+            color: #e67e22;
+        }
+
+        .status-pago {
+            color: #2ecc71;
+        }
+
+        .status-atrasado {
+            color: #e74c3c;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Menu de Navegação -->
+    <nav>
+        <a href="/Propriedades">Propriedades</a>
+        <a href="/Contratos">Contratos</a>
+        <a href="/Pagamentos">Pagamentos</a>
+    </nav>
+
+    <h1>Detalhes do Contrato</h1>
+
+    <div class="detalhes-container">
+        <!-- Detalhes do Contrato -->
+        <div class="detalhes-item">
+            <h3>Detalhes do Contrato</h3>
+            <p><strong>ID do Contrato:</strong> <%= contrato._id %></p>
+            <p><strong>Inquilino:</strong> <%= contrato.inquilino %></p>
+            <p><strong>Data Início:</strong> <%= contrato.dataInicio.toISOString().split('T')[0] %></p>
+            <p><strong>Data Fim:</strong> <%= contrato.dataFim.toISOString().split('T')[0] %></p>
+            <p><strong>Status:</strong> <%= contrato.status ? "Ativo" : "Inativo" %></p>
+            <p><strong>Valor do Contrato:</strong> R$<%= contrato.valorPropriedade.toFixed(2) %></p>
+        </div>
+
+        <!-- Detalhes da Propriedade -->
+        <div class="detalhes-item">
+            <h3>Detalhes da Propriedade</h3>
+            <p><strong>Endereço:</strong> <%= propriedade.endereco %></p>
+            <p><strong>Tipo:</strong> <%= propriedade.tipo %></p>
+            <p><strong>Quartos:</strong> <%= propriedade.quartos %></p>
+            <p><strong>Banheiros:</strong> <%= propriedade.banheiro %></p>
+            <p><strong>Aluguel:</strong> R$<%= propriedade.aluguel.toFixed(2) %></p>
+        </div>
+
+        <!-- Detalhes do Pagamento -->
+        <% if (pagamento) { %>
+        <div class="detalhes-item">
+            <h3>Detalhes do Pagamento</h3>
+            <p><strong>ID do Pagamento:</strong> <%= pagamento._id %></p>
+            <p><strong>Valor Pago:</strong> R$<%= pagamento.valorPago.toFixed(2) %></p>
+            <p><strong>Data de Pagamento:</strong> <%= pagamento.dataPagamento.toISOString().split('T')[0] %></p>
+            
+            <!-- Status do Pagamento -->
+            <p class="status-pagamento 
+                <% if (pagamento.situacao === 'Pendente') { %> status-pendente 
+                <% } else if (pagamento.situacao === 'Pago') { %> status-pago 
+                <% } else if (pagamento.situacao === 'Atrasado') { %> status-atrasado <% } %>">
+                <strong>Status:</strong> <%= pagamento.situacao %>
+            </p>
+        </div>
+        <% } else { %>
+        <div class="detalhes-item">
+            <h3>Detalhes do Pagamento</h3>
+            <p><strong>Aguardando pagamento...</strong></p>
+        </div>
+        <% } %>
+
+    </div>
+</body>
+</html>
